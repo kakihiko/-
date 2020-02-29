@@ -43,3 +43,13 @@ public class Exec {
 new演算子はコンストラクの名前からコピーするクラスを判断する。だから、コンストラクタの名前はクラスと同じにする。
 内部の処理としてはnew演算子はすべてのインスタンスメンバをメモリにコピーしている。
 
+■オーバーロード
+同じ名前のメソッドを作ること。
+
+public void add(){
+number++
+}
+
+public void add(int val){
+number += val;
+}
