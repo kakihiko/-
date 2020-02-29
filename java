@@ -53,3 +53,9 @@ number++
 public void add(int val){
 number += val;
 }
+
+■メモリの各領域
+領域／置かれるもの
+コード領域／プログラム
+スタック領域／変数
+ヒープ領域／インスタンス
