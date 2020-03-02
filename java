@@ -70,3 +70,13 @@ number += val;
 
 ■nullは参照型
 nullは参照先がないということ。参照型には代入できるが、intなどプリミティブ型には代入できない。
+
+
+■listのソート
+比較するキーを指定した並び替え
+list.sort(<コンパレータ>);
+list.sort(comp);
+コンパレータはComparatorインタフェースを実装したクラスのインスタンス
+pulic interface Comparator<T>{
+ int compare(T o1, T o2);
+}
