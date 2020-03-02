@@ -77,6 +77,17 @@ nullは参照先がないということ。参照型には代入できるが、i
 list.sort(<コンパレータ>);
 list.sort(comp);
 コンパレータはComparatorインタフェースを実装したクラスのインスタンス
-pulic interface Comparator<T>{
+public interface Comparator<T>{
  int compare(T o1, T o2);
+}
+
+比較したいインスタンスの型に合わせてComparatorインタフェースを実装したクラスを作る。
+実装するときはcompareメソッドをオーバーライドする。
+compareToメソッドは文字列の大小を数値で返す。
+public class NameComparator implements Comparator<Member> {
+public int compare(Member o1, Member o2){
+String s1 = o1.getName(),
+String o2 = o2.getName(),
+return s1.compareTo(s2)
+}
 }
