@@ -91,3 +91,9 @@ String o2 = o2.getName(),
 return s1.compareTo(s2)
 }
 }
+
+
+■ファクトリメソッド
+クラスのインスタンスを返すメソッドのこと
+LocalDate today = LocalDate.now();
+
