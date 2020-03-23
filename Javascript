@@ -1,0 +1,45 @@
+
+
+■連想配列と配列
+すべてのプロジェクトは連想配列
+
+
+・連想配列と配列の操作
+連想配列
+// 1
+var obj = { hoge: 'hoge' };
+
+// 2
+var obj = { 'hoge': 'hoge' };
+
+// 3
+var obj = {};
+obj.hoge = 'hoge';
+
+// 4
+var obj = {};
+obj['hoge'] = 'hoge';
+
+// 5
+var obj = new Object();
+obj.hoge = 'hoge';
+
+配列
+// 1
+var array = ['hoge', 'fuga'];
+
+// 2
+var array = new Array('hoge', 'fuga');
+
+// 3
+var array = Array('hoge', 'fuga');
+
+// 4
+var array = [];
+array[0] = 'hoge';
+array[1] = 'fuga';
+
+// 5
+var array = [];
+array['0'] = 'hoge'
+array['1'] = 'hoge'
