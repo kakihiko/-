@@ -140,3 +140,14 @@ Int メソッドB();
 クラスA implement インタフェースB
 ←メソッドBをオーバーライドしないとコンパイルエラーになる。
 
+
+■StringBuffer と StringBuilder の違い
+String
+↓
+StringBuilder
+↓
+StringBuffer
+
+StringBuilderは文字列を結合したりして新しくする時に、メモリの新しい領域を消費しない。
+StringBufferはStringBuilderをマルチスレッドで実行するので、速い。
+
