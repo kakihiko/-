@@ -99,6 +99,16 @@ select SUBSTR('Oracle Server', 2, 3)
 select SUBSTR('Oracle Server', 2)
 ⇒racle Server
 
+INSTR関数：
+指定した文字パターンが現れる位置を戻す。無ければ0
+select INSTR('Oracle Server','er', 1, 2)
+⇒12
+1文字目から'er'を探して２回目の'er' がある場所を返す。
+
+LPAD関数：
+select LPAD(yomi, 10, '*') 
+⇒********sa
+
 ADD_MONTH関数
 月の最終日とそれ以外で違うので注意
 select ADD_MONTH('14-02-28', 1)
@@ -117,5 +127,8 @@ select LAST_DAY('12-02-01')
 ROUND関数とTRUNC関数は日付でもOK
 ROUND(SYSDATE, 'YEAR')
 TRUNC(SYSDATE, 'YEAR')
+TRUNC(SYSDATE, 'MONTH')
+TRUNC(SYSDATE, 'DD')
+⇒defaultはDD
 
 
