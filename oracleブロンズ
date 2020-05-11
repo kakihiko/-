@@ -1,0 +1,56 @@
+
+
+
+・外部キー
+他の表の主キーを参照する列（組み合わせ）。外部キーの列に格納できる値は参照先の列に格納されている値のみに制限される。
+
+
+・各分類に含まれる文
+
+DML(manipulation)：データ操作言語
+・select
+・insert
+・update
+・delete
+・merge
+
+DDL(Definition)：データ定義言語
+・create
+・alter
+・drop
+・rename
+・truncate
+・comment
+
+DCL(Control)：データ制御言語
+・grant
+・revoke
+
+トランザクション制御
+・commit
+・rollback
+・savepoint
+
+
+NULL値を含む算術式は計算結果もNULL値になる
+
+ASの後ろに小文字、特殊文字（#,$）を含めるときは""（ダブルクォーテーション）で囲む。囲まないとすべて大文字になる
+
+リテラル（定数値）とは固定の文字列や日付、数値。
+
+
+引用符デリミタの使い方
+デリミタとしては、
+任意のシングルバイト文字やダブルバイト文字
+[ ]、{ }、( )、< >の各組合せ
+select yomi || q'['s Salary : ]' || sal AS "Monthly Salary"
+
+Monthly Salary
+-------------------
+sato's Salary : 500000
+
+
+
+
+
+
