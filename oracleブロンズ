@@ -49,8 +49,29 @@ Monthly Salary
 -------------------
 sato's Salary : 500000
 
+文字式の中にリテラルを使う場合は''(シングルクォーテーション)で囲む。数値リテラルは囲う必要はない。
+
+LIKE演算子
+_(アンダースコア)は任意の１文字と一致する
 
 
+ESCAPEオプション
+100%果汁ジュースに絞りたい場合
+where pname like '100\%%' escape '\';
 
+NOT演算子
+where not sal < 30000
+
+演算子の優先順位
+NOT ＞　AND　＞　OR
+
+where 1 = 1
+or A = B
+and C = D
+
+orとin演算子のパフォーマンスは変わらない
+
+order by
+nullは一番大きい値として扱われる
 
 
