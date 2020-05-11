@@ -88,3 +88,34 @@ where deptno = &deptno
 &&
 コマンドラインから１回のみ入力が求められ、同じSQLを発行したら最初に入力した値が入る。最後入力を求められない。
 
+
+単一行関数とグループ関数
+単一行関数・・・入力データごとに結果を１つ戻る
+グループ関数・・・複数県の入力データをグループ化した結果を１つだけ戻す
+
+SUBSTR関数
+select SUBSTR('Oracle Server', 2, 3)
+⇒rac
+select SUBSTR('Oracle Server', 2)
+⇒racle Server
+
+ADD_MONTH関数
+月の最終日とそれ以外で違うので注意
+select ADD_MONTH('14-02-28', 1)
+⇒14-03-31
+select ADD_MONTH('14-02-27', 1)
+⇒14-03-27
+
+NEXT_DAY関数
+select NEXT_DAY('14-01-24', '日曜日')
+⇒14-01-26
+
+LAST_DAY関数
+select LAST_DAY('12-02-01')
+⇒12-02-29
+
+ROUND関数とTRUNC関数は日付でもOK
+ROUND(SYSDATE, 'YEAR')
+TRUNC(SYSDATE, 'YEAR')
+
+
