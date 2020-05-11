@@ -73,5 +73,16 @@ orとin演算子のパフォーマンスは変わらない
 
 order by
 nullは一番大きい値として扱われる
+NULL FIRST、NULL LASTでNULLの順番を制御する
 
+行数を制御する
+OFFSET 5 ROWS //最初の５行を飛ばす
+FETCH FIRST 3 ROWS ONLY // ３行だけを取り出す
+
+置換変数
+&
+where deptno = &deptno
+コマンドラインからdeptnoの入力が求められる
+&&
+コマンドラインから１回のみ入力が求められ、同じSQLを発行したら最初に入力した値が入る。最後入力を求められない。
 
