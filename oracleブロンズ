@@ -79,6 +79,8 @@ NULL FIRST、NULL LASTでNULLの順番を制御する
 OFFSET 5 ROWS //最初の５行を飛ばす
 FETCH FIRST 3 ROWS ONLY // ３行だけを取り出す
 
+OFFSETには％キーワードは指定できない
+
 置換変数
 &
 where deptno = &deptno
