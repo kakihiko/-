@@ -132,3 +132,33 @@ TRUNC(SYSDATE, 'DD')
 ⇒defaultはDD
 
 
+■データ型の変換と変換関数
+
+TO_CHAR関数
+TO_DATE関数
+TO_NUMBER関数
+
+TO_CHAR関数
+select TO_CHAR(SYSDATE, 'YYYY"年"MM"月"DD"日"'(DAY)')
+⇒2014年01月24日(金曜日)
+
+NULLIF関数
+NULLIF(式1, 式2)
+⇒if(式1 = 式2){
+ return null
+} else {
+ return 式1
+}
+
+coalesce関数
+coalesce(null, null, 3, 4)
+⇒4
+
+
+DECODE関数
+select DECODE(
+deptno, 10, sal * 1.1
+      , 20, sal * 1.2
+      , sal * 1.5)
+
+
