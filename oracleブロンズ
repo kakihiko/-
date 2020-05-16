@@ -132,7 +132,7 @@ TRUNC(SYSDATE, 'DD')
 ⇒defaultはDD
 
 
-■データ型の変換と変換関数
+ーーー５章(データ型の変換と変換関数)ーーー
 
 TO_CHAR関数
 TO_DATE関数
@@ -160,5 +160,50 @@ select DECODE(
 deptno, 10, sal * 1.1
       , 20, sal * 1.2
       , sal * 1.5)
+
+・TO_CHAR関数は、引数に指定された値が数値書式の桁数を超えていると「#」を表示する。
+select TO_CHAR(123456.78, '99,999') FROM dual;
+⇒#######
+
+・日付書式にRR要素を指定すると、受け入れた値が現在の年に近い世紀として扱われる。
+現在日付：2014年7月26日
+select TO_CHAR(TO_DATE('07-26-95','MM-DD-RR'),'YYYY-MM-DD'),
+select TO_CHAR(TO_DATE('07-26-45','MM-DD-RR'),'YYYY-MM-DD')
+⇒1995-07-26
+⇒2045-07-26
+
+・FM要素の指定
+FM要素を指定して「埋込みモード」を無効にすると、数値の先行0や文字値の前後に含まれれるスペースが取り除かれる。
+select to_char(sysdate, 'fmddth' "of" Month, YYYY')
+⇒16th of May, 2020
+select to_char(sysdate, 'fmddth' "of" fmMonth, YYYY')
+⇒16th of May , 2020
+
+・英語の日付書式
+select TO_CHAR(sysdate, 'fmDdspth' "of" Month, YYYY') from dual;
+⇒Twenty-Sixth of May,2014
+
+・TO_CHAR関数は桁数の先頭に0を指定すると、先行0を表示する。
+select TO_CHAR(1111, '099,9999') from dual;
+⇒000,1111
+
+・NVL2関数は、引数の「式１」に指定された値がNULL値以外の場合は式２を、NULL値の場合は式３を戻す
+select NVL2(ボーナス, 年収＋ボーナス, 年収)
+
+・曜日を表示する日付書式
+DAY：月曜日
+DY ：月
+D  ：2
+
+・NULLIF関数
+NULLIF(式１、式２)
+式１、２が異なる場合は式１を戻す。
+式１にはNULL値を指定できません。
+
+
+ーーー６章(グループ関数（複数行関数）)ーーー
+
+・グループ関数のNULL値の扱い
+グループ関数はNULLを無視して集計処理を行う
 
 
