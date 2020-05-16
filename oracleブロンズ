@@ -203,7 +203,35 @@ NULLIF(式１、式２)
 
 ーーー６章(グループ関数（複数行関数）)ーーー
 
+・グループ関数の基本構文
+select(distinct | ALL(規定値) {列名 | 式})
+distinctを指定することで重複行を省略できる。
+
 ・グループ関数のNULL値の扱い
 グループ関数はNULLを無視して集計処理を行う
+count(*)の場合だけnull値も含む
 
+・グループ関数のネスト
+2レベルまでネスト可能、3レベル以上はエラー
+max(svg(a))
 
+・グループ関数の注意
+　group by句には、列別名は指定できない。
+ 
+・order by句には列別名およびselect句無いの位置を指定できるが、group by句には列別名およびselect句内の位置は指定できない
+
+・selectの各句の指定順序
+select
+from
+where
+group by
+having
+order by
+group by句とhavig句の順番は入れ替えられる
+
+・LISTAGG関数
+select deptno, avg(sal),
+       LISTAGG(ename, ':') within group (order by sal desc) member_list
+from employees
+
+⇒10 325000 佐藤：中：佐々木
