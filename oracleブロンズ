@@ -291,6 +291,23 @@ order by "Promotion Name"
 
 
 
+ーーー１０章(DML文によるデータの追加・更新・削除)ーーー
+
+・truncateはROLLBACKできない
+
+・ROLLBACK文で指定されたセーブポイントよりも後に作成したセーブポイントは破棄される
+SAVEPOINT a　
+ROLLBACK to a
+  
+・暗黙的なトランザクション処理
+　自動コミット：DDL文の実行、DCL文の実行
+　自動ロールバック：SQL Developer または SQL*Pぅｓの異常終了時
+ 　　　　　　　　　　システム障害発生時（Oracleインスタンスの異常停止時）
+           
+・for update句による排他ロック
+　select文実行時に対象の行に行レベルで排他ロックをかけることができる。
+ 
+ ・INSERT文では（＊）は使えない
 
 
 
