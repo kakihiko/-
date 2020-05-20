@@ -311,5 +311,28 @@ ROLLBACK to a
 
 
 
+ーーー１１章(DDL文を使用した表の作成と管理)ーーー
 
+・ビューとはSELECT文に名前を付けてデータベースに保存したもの
+
+・自分が所有しているスキーマ以外に表を作成するには、CREATE ANY TABLE権限が必要
+
+・CHAR型とVARCHAR2型の違い
+CHAR型：可変長
+VARCHAR2型：固定長（後ろに空白が追加される）
+
+・LONG型の制限
+　副問い合わせを使用した表の作成時に、LONG列はコピーできない
+　LONG列はGROUPBY句とORDERBY句に指定できない
+　LONG列は１つの表に１つだけ定義できる
+　LONG列には成約を定義できない
+ 
+ ・バイナリデータを格納するデータ型
+ RAW型
+ LONGRAW型
+ BLOB型：バイナリーロングオブジェクト
+ BFILE型：イメージファイルや動画ファイルなどのポインタ情報のみを格納
+ 
+ ・ROWID型
+ SELECT ROWID FROM テーブル
 
