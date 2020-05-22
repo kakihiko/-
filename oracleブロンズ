@@ -318,14 +318,17 @@ ROLLBACK to a
 ・自分が所有しているスキーマ以外に表を作成するには、CREATE ANY TABLE権限が必要
 
 ・CHAR型とVARCHAR2型の違い
-CHAR型：可変長
-VARCHAR2型：固定長（後ろに空白が追加される）
+CHAR型：１．最大サイズ２０００バイト、２．可変長、３．サイズを指定しないと１バイト
+VARCHAR2型：１．最大サイズ４０００バイト、２．固定長（後ろに空白が追加される）、３．データサイズ省略不可
 
 ・LONG型の制限
 　副問い合わせを使用した表の作成時に、LONG列はコピーできない
 　LONG列はGROUPBY句とORDERBY句に指定できない
 　LONG列は１つの表に１つだけ定義できる
-　LONG列には成約を定義できない
+　LONG列には制約を定義できない
+ 
+ ・NUMBER型
+ 精度を指定しなかった場合は最大３８桁になる
  
  ・バイナリデータを格納するデータ型
  RAW型
@@ -335,4 +338,36 @@ VARCHAR2型：固定長（後ろに空白が追加される）
  
  ・ROWID型
  SELECT ROWID FROM テーブル
+ 
+ ・制約の構文
+ 列レベル：列名の後に書くか、CREATE文の最後に書く
+ 列名　 CONSTRAINT　・・・
+ CONSTRAINT　emp5_empno_uk UNIQUE(empno)
+ 表レベル：
+ CONSTRAINT　emp5_empno_uk UNIQUE(empno, job)
+ 
+ ・UNIQUE制約
+ 重複した値を格納できなくなる。
+ NULL値を含めることは可能で、複数行にNULL値を含めることができる。
+ 
+ ・FOREIGN KEY制約の構文
+ [CONSTRANT 成約名] REFERENCE 親表名 (参照する列名[, 参照する列名])
+ 親表の子表から参照されていない行は削除できるが、参照されている行は削除できない。
+ 親表は参照されている行がなくても、子表から削除しないと削除できない。
+ 
+・ON DELETE CASCADEとON DELETE SET NULL
+deptno NUMBER(4) CONSTRAINT emp9_dept2_deptno_fk REFERENCES dept2(deptno) ON DELETE CASCADE
+→親表の行が削除されると、子表の行も削除される。
 
+・CREATE文
+CREATE TABLE 表名 AS SELECT・・・・
+データ型は副問い合わせの表がコピーされる
+NOTNULL制約以外の制約はコピーされない。（PRIMARY KEY制約で定義した暗黙のNOTNUL制約もコピーされない）
+
+・列の変更
+ALTER TABLE 表名 MODIFY (列名 [データ型] [DEFAULT式], [, 列名 [データ型]…])
+
+・オブジェクトの命名規約
+長さは３０バイト以下
+使用できる記号は「_」,「$」,「#」の３種類のみ
+アルファベットの大文字・小文字は区別されない
