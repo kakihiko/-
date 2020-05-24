@@ -40,7 +40,9 @@ DCL(Control)：データ制御言語
 ・NULL値を含む算術式は計算結果もNULL値になる
 
 ・列名＋AS（または空白）の後に小文字、特殊文字（#,$）を含めるときは""（ダブルクォーテーション）で囲む。囲まないとすべて大文字になる。
-
+ シングルクォーテーションで囲むとエラーになる。
+ 
+ 
 ・リテラル（定数値）とは固定の文字列や日付、数値。
 
 ・引用符デリミタの使い方
@@ -63,6 +65,7 @@ sato's Salary : 500000
 LIKE演算子
 _(アンダースコア)は任意の１文字と一致する
 
+ーーー３章(データの制御およびソート)ーーー
 
 ESCAPEオプション
 100%果汁ジュースに絞りたい場合
@@ -71,20 +74,22 @@ where pname like '100\%%' escape '\';
 NOT演算子
 where not sal < 30000
 
-演算子の優先順位
+・演算子の優先順位
 NOT ＞　AND　＞　OR
-
-where 1 = 1
-or A = B
-and C = D
+演算子の順番を調べるときは（）を書いて考える
+where 1 = 1 or A = B and C = D
+↓
+where 1 = 1 or (A = B and C = D)
 
 orとin演算子のパフォーマンスは変わらない
 
-order by
+・order by
 nullは一番大きい値として扱われる
 NULL FIRST、NULL LASTでNULLの順番を制御する
 
-行数を制御する
+・行数を制御する
+SELECT * FROM sample
+ORDER BY sal DESC, 1
 OFFSET 5 ROWS //最初の５行を飛ばす
 FETCH FIRST 3 ROWS ONLY // ３行だけを取り出す
 
@@ -97,22 +102,33 @@ where deptno = &deptno
 &&
 コマンドラインから１回のみ入力が求められ、同じSQLを発行したら最初に入力した値が入る。最後入力を求められない。
 
+ーーー４章(単一行関数)ーーー
 
 単一行関数とグループ関数
-単一行関数・・・入力データごとに結果を１つ戻る
-グループ関数・・・複数県の入力データをグループ化した結果を１つだけ戻す
+単一行関数・・・入力データごとに結果を１つ戻る（TO_CHARとか）
+グループ関数・・・複数県の入力データをグループ化した結果を１つだけ戻す（SUMとか）
 
-SUBSTR関数
+文字関数
+　大文字・小文字関数・・・UPPER
+　文字操作関数・・・CONCAT
+数値関数・・・ROUND
+日付関数・・・SYSDATE
+変換関数・・・
+汎用関数
+
+-SUBSTR関数
 select SUBSTR('Oracle Server', 2, 3)
 ⇒rac
 select SUBSTR('Oracle Server', 2)
 ⇒racle Server
 
-INSTR関数：
+
+-INSTR関数：
 指定した文字パターンが現れる位置を戻す。無ければ0
 select INSTR('Oracle Server','er', 1, 2)
 ⇒12
 1文字目から'er'を探して２回目の'er' がある場所を返す。
+1文字目に'er'があれば1が返る。
 
 LPAD関数：
 select LPAD(yomi, 10, '*') 
@@ -134,7 +150,9 @@ select LAST_DAY('12-02-01')
 ⇒12-02-29
 
 ROUND関数とTRUNC関数は日付でもOK
-ROUND(SYSDATE, 'YEAR')
+ROUND(SYSDATE, 'YEAR')・・・６月３０日|７月１日
+ROUND(SYSDATE, 'MONTH')・・・１５日｜１６日
+ROUND(SYSDATE, 'DD')・・・正午以前｜正午以降
 TRUNC(SYSDATE, 'YEAR')
 TRUNC(SYSDATE, 'MONTH')
 TRUNC(SYSDATE, 'DD')
@@ -153,6 +171,7 @@ select TO_CHAR(SYSDATE, 'YYYY"年"MM"月"DD"日"'(DAY)')
 
 NULLIF関数
 NULLIF(式1, 式2)
+式２にNULLを書くことはできない（下記意味がない、式１と式２の型が一緒でないといけないので）
 ⇒if(式1 = 式2){
  return null
 } else {
@@ -162,6 +181,14 @@ NULLIF(式1, 式2)
 coalesce関数
 coalesce(null, null, 3, 4)
 ⇒4
+
+NVL関数
+NVL（式1,式2）
+式１がNULL以外なら式１、NULLの場合は式２を返す
+
+NVL2関数
+NVL2（式1,式2,式3）
+式１がNULL値以外なら式２、NULL値なら式３
 
 
 DECODE関数
@@ -183,6 +210,8 @@ select TO_CHAR(TO_DATE('07-26-45','MM-DD-RR'),'YYYY-MM-DD')
 
 ・FM要素の指定
 FM要素を指定して「埋込みモード」を無効にすると、数値の先行0や文字値の前後に含まれれるスペースが取り除かれる。
+select to_char(sysdate, 'ddth' "of" Month, YYYY')
+⇒16th of May        , 2020
 select to_char(sysdate, 'fmddth' "of" Month, YYYY')
 ⇒16th of May, 2020
 select to_char(sysdate, 'fmddth' "of" fmMonth, YYYY')
@@ -227,7 +256,7 @@ max(svg(a))
 ・グループ関数の注意
 　group by句には、列別名は指定できない。
  
-・order by句には列別名およびselect句無いの位置を指定できるが、group by句には列別名およびselect句内の位置は指定できない
+・order by句には列別名およびselect句内の位置を指定できるが、group by句には列別名およびselect句内の位置は指定できない
 正
 order by 1
 →１番目のカラムの順番
@@ -240,6 +269,7 @@ where
 group by
 having
 order by
+group byとhavingはwhere句とorder by句の間
 group by句とhavig句の順番は入れ替えられる
 
 ・LISTAGG関数
