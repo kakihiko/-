@@ -309,6 +309,7 @@ where deptno = (select deptno from sample2)
 
 ・UNIONALL演算子
 内部でソート処理を行わない。１つ目の問い合わせの結果の後ろに２つ目の問い合わせの結果を追加する。
+まとめる列はデータ型は一緒である必要があるが、桁数は異なってもOK。
 
 ・INTERSECT演算子
 重複は削除される。
