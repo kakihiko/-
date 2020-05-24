@@ -347,9 +347,14 @@ ROLLBACK to a
 ・for update句による排他ロック
 　select文実行時に対象の行に行レベルで排他ロックをかけることができる。
  
- ・INSERT文では（＊）は使えない
-
-
+・INSERT文
+-構文
+INSERT INTO 表名 (列名1,列名2) VALUES ('1','2')
+INSERT INTO 表名 (列名1,列名2) 
+-ルール
+INSERT文では（＊）は使えない
+副問い合わせを使用しないINSERT文ではVALUES句を省略できない
+列数と同数の値をINSERTするときは列名を省略できる
 
 ーーー１１章(DDL文を使用した表の作成と管理)ーーー
 
