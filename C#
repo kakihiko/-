@@ -31,4 +31,32 @@ Write・・・改行なし
 ■ クラス
 クラスとは関連のある変数とメソッドをまとめたもの
 
+■ namespaceとクラス
+プログラムの最初にnamespace 名前空間としておく。他のプログラムで使いたい場合は、名前空間.クラス名とすることで使うことができる。
+またusing 名前空間とすることで、名前空間.クラス名と書かなくてよい
+Console.WriteLineのConsoleクラスはSystem名前空間のクラス。using SystemとすることでConsoleクラスがSystem.Consoleとしないで使える。
+
+■値型と参照型
+値型・・・int,float,double,bool
+参照型・・・string,int[]
+
+■ アクセス修飾子
+protected・・・自分のクラスまたは派生クラスからのみアクセス可能
+メンバ変数にアクセス修飾子をつけないとprivateを宣言したものとみなされる
+
+■ staticについて
+staticはインスタンス間で共有される。staticを付けたメソッドから、staticの付いてないメソッドを呼び出すことができない。
+Mainメソッドはstaticが付いているので、Mainメソッドから直接呼び出すメソッドにはstaticを付ける必要がある。
+
+
+■ オーバーロード
+引数の個数や引数の型が異なっていれば同じ名前のメソッドを複数定義することができる。
+
+■ ポリモーフィズム
+派生クラスのインスタンスを基本クラスの変数に入れることができる
+SuperClass[] superclasses = new SuperClass[5];
+SuperClass[0] = new SubClass1();
+SuperClass[1] = new SubClass2();
+
+
 
